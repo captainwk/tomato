@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tomato/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,8 +9,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: SplashScreen(),
-    );
+    return TomatoApp();
+  }
+}
+
+
+class TomatoApp extends StatelessWidget {
+  const TomatoApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.amber,);
   }
 }
