@@ -1,3 +1,4 @@
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -11,7 +12,7 @@ class SplashScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset('assets/images/golden.jpeg'),
+              ExtendedImage.asset('assets/images/golden.jpeg'),
               CircularProgressIndicator(
                 color: Colors.red,
               ),
