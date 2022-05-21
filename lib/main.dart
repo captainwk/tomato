@@ -10,34 +10,34 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: spl(),
+      home: SplashScreen(),
     );
   }
 }
 
-class spl extends StatefulWidget {
-  const spl({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  State<spl> createState() => _splState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _splState extends State<spl> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(height: 100, color: Colors.amber),
-            Container(height: 100, color: Colors.green),
-            Container(height: 100, color: Colors.yellow),
-            Container(height: 100, color: Colors.red),
-            Container(height: 100, color: Colors.orange),
-            Container(height: 100, color: Colors.blue),
-            Container(height: 100, color: Colors.deepPurple),
-          ],
+    return Scaffold(
+      body: Center(
+        child: Container(
+          width: 100,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('assets/images/golden.jpeg'),
+              Container(height: 100, color: Colors.red),
+              Container(height: 100, color: Colors.blue),
+              Container(height: 100, color: Colors.orange),
+            ],
+          ),
         ),
       ),
     );
