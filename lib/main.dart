@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+// 깃에서 수정
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
 
