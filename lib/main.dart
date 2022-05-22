@@ -11,17 +11,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Object>(
-        future: Future.delayed(const Duration(seconds: 3), () => 100),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            debugPrint('error occur while loading');
-            return const Text('Error occur');
-          } else if (snapshot.hasData) {
-            return const TomatoApp();
-          } else {  // 어떤 데이터도 도착하지 않았을 때
-            return const SplashScreen();
-          }
-        });
+      future: Future.delayed(const Duration(milliseconds: 300), () => 100),
+      builder: (context, snapshot) {
+        return AnimatedSwitcher(duration: const Duration(seconds: 1),
+        child: _splashLoadingWidget(snapshot));
+      });
+  }
+
+  StatelessWidget _splashLoadingWidget(AsyncSnapshot<Object> snapshot) {
+    if (snapshot.hasError) {
+      debugPrint('error occur while loading');
+      return const Text('Error occur');
+    } else if (snapshot.hasData) {
+      return const TomatoApp();
+    } else {
+      // 어떤 데이터도 도착하지 않았을 때
+      return const SplashScreen();
+    }
   }
 }
 
