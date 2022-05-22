@@ -1,6 +1,11 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:tomato/splash_screen.dart';
+import 'package:tomato/router/locations.dart';
+import 'package:tomato/screens/splash_screen.dart';
 import 'package:tomato/utils/logger.dart';
+
+final _routerDelegate = BeamerDelegate(
+    locationBuilder: BeamerLocationBuilder(beamLocations:[HomeLocation()]));
 
 void main() {
   logger.d('My first logger');
@@ -13,11 +18,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Object>(
-      future: Future.delayed(const Duration(milliseconds: 300), () => 100),
-      builder: (context, snapshot) {
-        return AnimatedSwitcher(duration: const Duration(seconds: 1),
-        child: _splashLoadingWidget(snapshot));
-      });
+        future: Future.delayed(const Duration(milliseconds: 300), () => 100),
+        builder: (context, snapshot) {
+          return AnimatedSwitcher(duration: const Duration(seconds: 1),
+              child: _splashLoadingWidget(snapshot));
+        });
   }
 
   StatelessWidget _splashLoadingWidget(AsyncSnapshot<Object> snapshot) {
@@ -38,8 +43,8 @@ class TomatoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.amber,
-    );
+    return MaterialApp.router(
+        routeInformationParser: BeamerParser(),
+        routerDelegate: _routerDelegate);
   }
 }
