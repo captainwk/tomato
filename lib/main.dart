@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tomato/splash_screen.dart';
+import 'package:tomato/utils/logger.dart';
 
 void main() {
+  logger.d('My first logger');
   runApp(const MyApp());
 }
 
