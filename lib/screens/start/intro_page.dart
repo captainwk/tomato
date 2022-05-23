@@ -20,7 +20,17 @@ class IntroPage extends StatelessWidget {
                   .headline3!
                   .copyWith(color: Theme.of(context).colorScheme.primary),//copyWith로 등록한 값을 제외하고 headline3를 따라서 스타일을 지정한다
             ),
-            ExtendedImage.asset('assets/images/carrot_intro.png'),
+            Stack (
+              children: [
+                ExtendedImage.asset('assets/images/carrot_intro.png'),
+                Positioned(
+                    left: 50,
+                    right: 50,
+                    top: 50,
+                    bottom: 50,
+                    child: ExtendedImage.asset('assets/images/carrot_intro_pos.png')),
+              ],
+            ),
             const Text(
               '우리 동네 중고 직거래 토마토마켓',
               style: TextStyle(
