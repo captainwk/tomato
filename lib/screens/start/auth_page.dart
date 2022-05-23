@@ -36,6 +36,7 @@ class AuthPage extends StatelessWidget {
             ),
             const SizedBox(height: common_padding),
             TextFormField(
+              keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
               focusedBorder: inputBorder,
               border: inputBorder,
