@@ -7,7 +7,7 @@ class AddressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.all(16),
+      minimum: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
           TextFormField(
@@ -28,11 +28,13 @@ class AddressPage extends StatelessWidget {
             ),
           ),
           SizedBox(
+            // height: 30,
             width: double.infinity,
             child: TextButton.icon(
               onPressed: () {},
               style: TextButton.styleFrom(
                 backgroundColor: Theme.of(context).primaryColor,
+                // minimumSize: Size(1, 40)
               ),
               label: Text(
                 '현재위치로 찾기',
@@ -47,6 +49,7 @@ class AddressPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
+              padding: EdgeInsets.symmetric(vertical: 16),
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text("address $index"),
