@@ -5,12 +5,13 @@ import 'package:tomato/screens/home_screen.dart';
 class HomeLocation extends BeamLocation {
   @override
   List<BeamPage> buildPages(
-      BuildContext context, RouteInformationSerializable state) {
+      // BuildContext context, RouteInformationSerializable state) {
+      BuildContext context, BeamState state) {
     return [
-      const BeamPage(child: HomeScreen(), key: ValueKey('home')),
+      BeamPage(child: HomeScreen(), key: ValueKey('home')),
     ];
   }
 
   @override
-  List<Pattern> get pathPatterns => ['/'];
+  List get pathBlueprints => ['/'];
 }
