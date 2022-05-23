@@ -18,13 +18,13 @@ class AddressPage extends StatelessWidget {
               ),
               hintText: '도로명으로 검색',
               hintStyle: TextStyle(color: Theme.of(context).hintColor),
-              border: UnderlineInputBorder(
+              border: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey),
               ),
               // focusedBorder: UnderlineInputBorder(
               //     borderSide: BorderSide(color: Colors.blue)),
               prefixIconConstraints:
-                  BoxConstraints(minWidth: 24, minHeight: 24),
+                  const BoxConstraints(minWidth: 24, minHeight: 24),
             ),
           ),
           SizedBox(
@@ -44,7 +44,18 @@ class AddressPage extends StatelessWidget {
                 color: Theme.of(context).textTheme.button!.color,
               ),
             ),
-          )
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text("address $index"),
+                  subtitle: Text("subtitle"),
+                );
+              },
+              itemCount: 100,
+            ),
+          ),
         ],
       ),
     );
