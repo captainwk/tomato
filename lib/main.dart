@@ -9,10 +9,9 @@ final _routerDelegate = BeamerDelegate(
     // guard를 하고 싶은 path를 넣어준다.
     guards: [
       BeamGuard(
-          // pathPatterns: ['/'],
           pathBlueprints: ['/'],
           check: (context, location) {
-            return false; // 로그인이 안되어 있으면 false , 되어 있으면 true
+            return true; // 로그인이 안되어 있으면 false , 되어 있으면 true
           },
           showPage: BeamPage(child: AuthScreen()))
     ], locationBuilder: BeamerLocationBuilder(beamLocations: [HomeLocation()]));
