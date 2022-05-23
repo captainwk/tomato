@@ -55,8 +55,12 @@ class TomatoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
         theme: ThemeData(
-          primarySwatch: Colors.red,
-        ),
+            primarySwatch: Colors.red,
+            fontFamily: 'DoHyeon',
+            textTheme: const TextTheme(
+              headline3: TextStyle(fontFamily: 'DoHyeon'), // headline3에만 내가 원하는 폰트를 지정할 수 있다.
+              button: TextStyle(color: Colors.white)
+            )),
         routeInformationParser: BeamerParser(),
         routerDelegate: _routerDelegate);
   }
