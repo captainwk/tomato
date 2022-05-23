@@ -1,10 +1,11 @@
-
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tomato/utils/logger.dart';
 
 class IntroPage extends StatelessWidget {
-  const IntroPage({Key? key}) : super(key: key);
+  PageController controller;
+
+  IntroPage(this.controller, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +22,15 @@ class IntroPage extends StatelessWidget {
               children: [
                 Text(
                   '토마토 마켓',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline3!
-                      .copyWith(color: Theme.of(context).colorScheme.primary),//copyWith로 등록한 값을 제외하고 headline3를 따라서 스타일을 지정한다
+                  style: Theme.of(context).textTheme.headline3!.copyWith(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary), //copyWith로 등록한 값을 제외하고 headline3를 따라서 스타일을 지정한다
                 ),
                 SizedBox(
                   width: imgSize,
                   height: imgSize,
-                  child: Stack (
+                  child: Stack(
                     children: [
                       ExtendedImage.asset('assets/images/carrot_intro.png'),
                       Positioned(
@@ -37,7 +38,8 @@ class IntroPage extends StatelessWidget {
                           left: imgSize * 0.45,
                           height: sizeOfPosImg,
                           top: imgSize * 0.45,
-                          child: ExtendedImage.asset('assets/images/carrot_intro_pos.png')),
+                          child: ExtendedImage.asset(
+                              'assets/images/carrot_intro_pos.png')),
                     ],
                   ),
                 ),
@@ -62,6 +64,11 @@ class IntroPage extends StatelessWidget {
                       backgroundColor: Theme.of(context).primaryColor,
                     ),
                     onPressed: () {
+                      controller.animateToPage(
+                        1,// 페이지의 인덱스
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.ease,
+                      );
                       logger.d('on text button clicked!!!');
                     },
                     child: Text(
