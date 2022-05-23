@@ -33,10 +33,6 @@ class AddressPage extends StatelessWidget {
             width: double.infinity,
             child: TextButton.icon(
               onPressed: () {},
-              style: TextButton.styleFrom(
-                backgroundColor: Theme.of(context).primaryColor,
-                // minimumSize: Size(1, 40)
-              ),
               label: Text(
                 '현재위치로 찾기',
                 style: Theme.of(context).textTheme.button,

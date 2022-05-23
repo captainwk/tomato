@@ -55,9 +55,6 @@ class IntroPage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
-                    ),
                     onPressed: () {
                       controller.animateToPage(
                         1,// 페이지의 인덱스

@@ -9,7 +9,8 @@ class AuthPage extends StatelessWidget {
   final inputBorder =
       const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey));
 
-  final TextEditingController _textEditingController = TextEditingController(text: "010");
+  final TextEditingController _textEditingController =
+      TextEditingController(text: "010");
 
   @override
   Widget build(BuildContext context) {
@@ -41,14 +42,33 @@ class AuthPage extends StatelessWidget {
             const SizedBox(height: common_padding),
             TextFormField(
               controller: _textEditingController,
-                keyboardType: TextInputType.phone,
-                inputFormatters: [
-                  MaskedInputFormatter('000 0000 0000')
-                ],
-                decoration: InputDecoration(
-                  focusedBorder: inputBorder,
-                  border: inputBorder,
-                )),
+              keyboardType: TextInputType.phone,
+              inputFormatters: [MaskedInputFormatter('000 0000 0000')],
+              decoration: InputDecoration(
+                focusedBorder: inputBorder,
+                border: inputBorder,
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(onPressed: () {}, child: const Text('인증문자 발송')),
+            ),
+            const SizedBox(
+              height: common_sm_padding,
+            ),
+            TextFormField(
+              controller: _textEditingController,
+              keyboardType: TextInputType.phone,
+              inputFormatters: [MaskedInputFormatter('000 0000 0000')],
+              decoration: InputDecoration(
+                focusedBorder: inputBorder,
+                border: inputBorder,
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(onPressed: () {}, child: const Text('인증문자 발송')),
+            )
           ],
         ),
       ),

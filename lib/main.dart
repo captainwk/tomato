@@ -61,6 +61,9 @@ class TomatoApp extends StatelessWidget {
           textTheme: const TextTheme(
               headline3: TextStyle(fontFamily: 'DoHyeon'),  // headline3에만 내가 원하는 폰트를 지정할 수 있다.
               button: TextStyle(color: Colors.white)),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(backgroundColor: Colors.red, primary: Colors.white)
+          ),
           appBarTheme: const AppBarTheme(
             elevation: 2,
             backgroundColor: Colors.white,
