@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tomato/screens/start/intro_page.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -8,11 +9,9 @@ class AuthScreen extends StatelessWidget {
     return Scaffold(
       body: PageView(
         children: [
-          Center(
-            child: Text('Auth screen!!'),
-          ),
-          Container( color: Colors.accents[2],),
-          Container( color: Colors.accents[3],),
+          IntroPage(),
+          Container( color: Colors.blue,),
+          Container( color: Colors.red,),
         ],
       ),
     );
