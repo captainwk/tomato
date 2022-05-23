@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tomato/screens/start/addredd_page.dart';
+import 'package:tomato/screens/start/auth_page.dart';
 import 'package:tomato/screens/start/intro_page.dart';
 
-class AuthScreen extends StatelessWidget {
-  AuthScreen({Key? key}) : super(key: key);
+class StartScreen extends StatelessWidget {
+  StartScreen({Key? key}) : super(key: key);
 
   final PageController _pageController = PageController();
 
@@ -11,14 +12,13 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        physics: const NeverScrollableScrollPhysics(),
+        // physics: const NeverScrollableScrollPhysics(),
         // physics: const AlwaysScrollableScrollPhysics(),
         controller: _pageController,
         children: [
           IntroPage(_pageController),
-          AddressPage(),
-          Container( color: Colors.blue,),
-          Container( color: Colors.red,),
+          const AddressPage(),
+          const AuthPage(),
         ],
       ),
     );

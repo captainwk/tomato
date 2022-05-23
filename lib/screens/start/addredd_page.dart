@@ -49,11 +49,11 @@ class AddressPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 16),
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text("address $index"),
-                  subtitle: Text("subtitle"),
+                  subtitle: const Text("subtitle"),
                 );
               },
               itemCount: 100,

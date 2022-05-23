@@ -1,7 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:tomato/router/locations.dart';
-import 'package:tomato/screens/auth_screen.dart';
+import 'package:tomato/screens/start_screen.dart';
 import 'package:tomato/screens/splash_screen.dart';
 import 'package:tomato/utils/logger.dart';
 
@@ -13,7 +13,7 @@ final _routerDelegate = BeamerDelegate(
           check: (context, location) {
             return false; // 로그인이 안되어 있으면 false , 되어 있으면 true
           },
-          showPage: BeamPage(child: AuthScreen()))
+          showPage: BeamPage(child: StartScreen()))
     ], locationBuilder: BeamerLocationBuilder(beamLocations: [HomeLocation()]));
 
 void main() {
@@ -55,13 +55,18 @@ class TomatoApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
         theme: ThemeData(
-            primarySwatch: Colors.red,
-            fontFamily: 'DoHyeon',
-            hintColor: Colors.grey[350],
-            textTheme: const TextTheme(
-              headline3: TextStyle(fontFamily: 'DoHyeon'), // headline3에만 내가 원하는 폰트를 지정할 수 있다.
-              button: TextStyle(color: Colors.white)
-            )),
+          primarySwatch: Colors.red,
+          fontFamily: 'DoHyeon',
+          hintColor: Colors.grey[350],
+          textTheme: const TextTheme(
+              headline3: TextStyle(fontFamily: 'DoHyeon'),  // headline3에만 내가 원하는 폰트를 지정할 수 있다.
+              button: TextStyle(color: Colors.white)),
+          appBarTheme: const AppBarTheme(
+            elevation: 2,
+            backgroundColor: Colors.white,
+            titleTextStyle: TextStyle(color: Colors.black, fontFamily: 'DoHyeon', fontSize: 24),
+          ),
+        ),
         routeInformationParser: BeamerParser(),
         routerDelegate: _routerDelegate);
   }
