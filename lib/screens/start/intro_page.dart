@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:tomato/constants/common_size.dart';
 import 'package:tomato/utils/logger.dart';
 
 class IntroPage extends StatelessWidget {
@@ -16,7 +17,7 @@ class IntroPage extends StatelessWidget {
         final sizeOfPosImg = imgSize * 0.1;
         return SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: common_padding),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -43,19 +44,13 @@ class IntroPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Text(
+                Text(
                   '우리 동네 중고 직거래 토마토마켓',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Theme.of(context).textTheme.headline6
                 ),
-                const Text(
+                Text(
                   '토마토마켓은 동네 직거래 마켓이에요.\n내 동네를 설정하고 시작해보세요!',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: Theme.of(context).textTheme.subtitle1
                 ),
                 SizedBox(
                   width: double.infinity,

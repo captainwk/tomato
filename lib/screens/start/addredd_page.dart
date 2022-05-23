@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tomato/constants/common_size.dart';
 
 class AddressPage extends StatelessWidget {
   const AddressPage({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class AddressPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: const EdgeInsets.symmetric(horizontal: 16),
+      minimum: const EdgeInsets.symmetric(horizontal: common_padding),
       child: Column(
         children: [
           TextFormField(
@@ -49,7 +50,7 @@ class AddressPage extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: common_padding),
               itemBuilder: (context, index) {
                 return ListTile(
                   title: Text("address $index"),
