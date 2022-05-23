@@ -11,7 +11,7 @@ final _routerDelegate = BeamerDelegate(
       BeamGuard(
           pathBlueprints: ['/'],
           check: (context, location) {
-            return true; // 로그인이 안되어 있으면 false , 되어 있으면 true
+            return false; // 로그인이 안되어 있으면 false , 되어 있으면 true
           },
           showPage: BeamPage(child: AuthScreen()))
     ], locationBuilder: BeamerLocationBuilder(beamLocations: [HomeLocation()]));
