@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:tomato/constants/duration.dart';
 import 'package:tomato/router/locations.dart';
 import 'package:tomato/screens/start_screen.dart';
 import 'package:tomato/screens/splash_screen.dart';
@@ -27,10 +28,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Object>(
-        future: Future.delayed(const Duration(milliseconds: 300), () => 100),
+        future: Future.delayed(duration, () => 100),
         builder: (context, snapshot) {
           return AnimatedSwitcher(
-              duration: const Duration(seconds: 1),
+              duration: duration,
               child: _splashLoadingWidget(snapshot));
         });
   }
@@ -59,15 +60,22 @@ class TomatoApp extends StatelessWidget {
           fontFamily: 'DoHyeon',
           hintColor: Colors.grey[350],
           textTheme: const TextTheme(
-              headline3: TextStyle(fontFamily: 'DoHyeon'),  // headline3에만 내가 원하는 폰트를 지정할 수 있다.
-              button: TextStyle(color: Colors.white)),
+            headline3: TextStyle(fontFamily: 'DoHyeon'),
+            // headline3에만 내가 원하는 폰트를 지정할 수 있다.
+            button: TextStyle(color: Colors.white),
+          ),
           textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(backgroundColor: Colors.red, primary: Colors.white)
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.red,
+              primary: Colors.white,
+              minimumSize: const Size(48, 48),
+            ),
           ),
           appBarTheme: const AppBarTheme(
             elevation: 2,
             backgroundColor: Colors.white,
-            titleTextStyle: TextStyle(color: Colors.black, fontFamily: 'DoHyeon', fontSize: 24),
+            titleTextStyle: TextStyle(
+                color: Colors.black, fontFamily: 'DoHyeon', fontSize: 24),
           ),
         ),
         routeInformationParser: BeamerParser(),

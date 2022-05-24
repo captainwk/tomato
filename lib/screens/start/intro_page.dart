@@ -1,6 +1,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tomato/constants/common_size.dart';
+import 'package:tomato/constants/duration.dart';
 import 'package:tomato/utils/logger.dart';
 
 class IntroPage extends StatelessWidget {
@@ -58,7 +59,7 @@ class IntroPage extends StatelessWidget {
                     onPressed: () {
                       controller.animateToPage(
                         1,// 페이지의 인덱스
-                        duration: const Duration(milliseconds: 500),
+                        duration: duration,
                         curve: Curves.ease,
                       );
                       logger.d('on text button clicked!!!');

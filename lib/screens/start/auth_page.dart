@@ -2,18 +2,27 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:tomato/constants/common_size.dart';
+import 'package:tomato/constants/duration.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   AuthPage({Key? key}) : super(key: key);
 
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
   final inputBorder =
       const OutlineInputBorder(borderSide: BorderSide(color: Colors.grey));
 
   final TextEditingController _phoneNumberController =
       TextEditingController(text: "010");
+
   final TextEditingController _codeController = TextEditingController();
 
   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+
+  VerificationStatus _verificationStatus = VerificationStatus.none;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +40,7 @@ class AuthPage extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(common_padding),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
                 children: [
@@ -62,39 +72,82 @@ class AuthPage extends StatelessWidget {
                   }
                 },
               ),
-              SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    if(_formkey.currentState != null) {
-                      final bool passed = _formkey.currentState!.validate();
-                      print(passed);
+              TextButton(
+                onPressed: () {
+                  if (_formkey.currentState != null) {
+                    final bool passed = _formkey.currentState!.validate();
+                    print(passed);
+                    if (passed) {
+                      setState(() {
+                        _verificationStatus = VerificationStatus.codeSent;
+                      });
                     }
-                  },
-                  child: const Text('인증문자 발송'),
-                ),
+                  }
+                },
+                child: const Text('인증문자 발송'),
               ),
               const SizedBox(
                 height: common_sm_padding,
               ),
-              TextFormField(
-                controller: _codeController,
-                keyboardType: TextInputType.number,
-                inputFormatters: [MaskedInputFormatter('000000')],
-                decoration: InputDecoration(
-                  focusedBorder: inputBorder,
-                  border: inputBorder,
+              AnimatedOpacity(
+                duration: duration,
+                opacity:
+                    (_verificationStatus == VerificationStatus.none) ? 0 : 1,
+                curve: Curves.easeInOut,
+                child: AnimatedContainer(
+                  height: getVerificationHeight(_verificationStatus),
+                  curve: Curves.easeInOut,
+                  duration: duration,
+                  child: TextFormField(
+                    controller: _codeController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [MaskedInputFormatter('000000')],
+                    decoration: InputDecoration(
+                      focusedBorder: inputBorder,
+                      border: inputBorder,
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(
-                width: double.infinity,
-                child:
-                    TextButton(onPressed: () {}, child: const Text('인증문자 발송')),
-              )
+              AnimatedContainer(
+                  height: getVerificationBtnHeight(_verificationStatus),
+                  duration: duration,
+                  curve: Curves.easeInOut,
+                  child: TextButton(
+                      onPressed: () {}, child: const Text('인증문자 발송')))
             ],
           ),
         ),
       ),
     );
   }
+
+  double getVerificationHeight(VerificationStatus status) {
+    switch (status) {
+      case VerificationStatus.none:
+        return 0;
+      case VerificationStatus.codeSent:
+      case VerificationStatus.verifying:
+      case VerificationStatus.verificationDone:
+        return 60 + common_sm_padding;
+    }
+  }
+
+  double getVerificationBtnHeight(VerificationStatus status) {
+    switch (status) {
+      case VerificationStatus.none:
+        return 0;
+      case VerificationStatus.codeSent:
+      case VerificationStatus.verifying:
+      case VerificationStatus.verificationDone:
+        return 48;
+    }
+  }
+}
+
+enum VerificationStatus {
+  none, // 아무것도 안된 상태
+  codeSent, // 인증문자를 보낸 상태
+  verifying, // 인증을 하고 있는 상태
+  verificationDone, // 인증이 완료된 상태
 }
