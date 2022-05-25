@@ -14,7 +14,9 @@ final _routerDelegate = BeamerDelegate(
       BeamGuard(
           pathBlueprints: ['/'],
           check: (context, location) {
-            return false; // 로그인이 안되어 있으면 false , 되어 있으면 true
+            // return context.read<UserProvider>().userState;
+            // read를 사용하지 않고 watch를 사용해 주면 notifyListeners를 호출할 때 마다 값을 다시 받는다
+            return context.watch<UserProvider>().userState; // 로그인이 안되어 있으면 false , 되어 있으면 true
           },
           showPage: BeamPage(child: StartScreen()))
     ], locationBuilder: BeamerLocationBuilder(beamLocations: [HomeLocation()]));

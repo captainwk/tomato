@@ -1,8 +1,10 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
+import 'package:provider/provider.dart';
 import 'package:tomato/constants/common_size.dart';
 import 'package:tomato/constants/duration.dart';
+import 'package:tomato/states/user_provider.dart';
 
 class AuthPage extends StatefulWidget {
   AuthPage({Key? key}) : super(key: key);
@@ -118,7 +120,7 @@ class _AuthPageState extends State<AuthPage> {
                     curve: Curves.easeInOut,
                     child: TextButton(
                       onPressed: () {
-                        attemptVerify();
+                        attemptVerify(context);
                       },
                       child:
                           (_verificationStatus == VerificationStatus.verifying)
@@ -155,17 +157,22 @@ class _AuthPageState extends State<AuthPage> {
     }
   }
 
-  void attemptVerify() async {
+  void attemptVerify(BuildContext context) async {
     setState(() {
       _verificationStatus = VerificationStatus.verifying;
     });
 
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
 
     setState(() {
       _verificationStatus = VerificationStatus.verificationDone;
       // _verificationStatus = VerificationStatus.none;
     });
+
+    // read가 아닌 watch를 쓰면 변경된 데이터 notifyListeners를 통해 다시 와서 무한루프를 돌게된다
+    // 따라서 데이터를 변경할 때 는 read를 사용
+    if (!mounted) return;
+    context.read<UserProvider>().setUserAuth(true);
   }
 }
 
