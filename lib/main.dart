@@ -1,9 +1,11 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tomato/constants/duration.dart';
 import 'package:tomato/router/locations.dart';
 import 'package:tomato/screens/start_screen.dart';
 import 'package:tomato/screens/splash_screen.dart';
+import 'package:tomato/states/user_provider.dart';
 import 'package:tomato/utils/logger.dart';
 
 final _routerDelegate = BeamerDelegate(
@@ -54,31 +56,36 @@ class TomatoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-          fontFamily: 'DoHyeon',
-          hintColor: Colors.grey[350],
-          textTheme: const TextTheme(
-            headline3: TextStyle(fontFamily: 'DoHyeon'),
-            // headline3에만 내가 원하는 폰트를 지정할 수 있다.
-            button: TextStyle(color: Colors.white),
-          ),
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-              backgroundColor: Colors.red,
-              primary: Colors.white,
-              minimumSize: const Size(48, 48),
+    return ChangeNotifierProvider<UserProvider>(
+      create: (BuildContext context) {
+        return UserProvider();
+      },
+      child: MaterialApp.router(
+          theme: ThemeData(
+            primarySwatch: Colors.red,
+            fontFamily: 'DoHyeon',
+            hintColor: Colors.grey[350],
+            textTheme: const TextTheme(
+              headline3: TextStyle(fontFamily: 'DoHyeon'),
+              // headline3에만 내가 원하는 폰트를 지정할 수 있다.
+              button: TextStyle(color: Colors.white),
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.red,
+                primary: Colors.white,
+                minimumSize: const Size(48, 48),
+              ),
+            ),
+            appBarTheme: const AppBarTheme(
+              elevation: 2,
+              backgroundColor: Colors.white,
+              titleTextStyle: TextStyle(
+                  color: Colors.black, fontFamily: 'DoHyeon', fontSize: 24),
             ),
           ),
-          appBarTheme: const AppBarTheme(
-            elevation: 2,
-            backgroundColor: Colors.white,
-            titleTextStyle: TextStyle(
-                color: Colors.black, fontFamily: 'DoHyeon', fontSize: 24),
-          ),
-        ),
-        routeInformationParser: BeamerParser(),
-        routerDelegate: _routerDelegate);
+          routeInformationParser: BeamerParser(),
+          routerDelegate: _routerDelegate),
+    );
   }
 }

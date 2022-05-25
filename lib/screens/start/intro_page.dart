@@ -1,7 +1,9 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tomato/constants/common_size.dart';
 import 'package:tomato/constants/duration.dart';
+import 'package:tomato/states/user_provider.dart';
 import 'package:tomato/utils/logger.dart';
 
 class IntroPage extends StatelessWidget {
@@ -11,6 +13,7 @@ class IntroPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    logger.d('current user state: ${context.read<UserProvider>().userState}');
     return LayoutBuilder(
       builder: (context, constraints) {
         Size size = MediaQuery.of(context).size;
