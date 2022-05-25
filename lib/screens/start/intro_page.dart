@@ -1,8 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tomato/constants/common_size.dart';
-import 'package:tomato/constants/duration.dart';
 import 'package:tomato/states/user_provider.dart';
 import 'package:tomato/utils/logger.dart';
 
@@ -59,13 +59,17 @@ class IntroPage extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: TextButton(
-                    onPressed: () {
-                      controller.animateToPage(
-                        1,// 페이지의 인덱스
-                        duration: duration,
-                        curve: Curves.ease,
-                      );
-                      logger.d('on text button clicked!!!');
+                    onPressed: () async {
+                      // controller.animateToPage(
+                      //   1,// 페이지의 인덱스
+                      //   duration: duration,
+                      //   curve: Curves.ease,
+                      // );
+                      // logger.d('on text button clicked!!!');
+
+                      var response = await Dio().get('https://randomuser.me/api/');
+                      logger.d(response);
+
                     },
                     child: Text(
                       '내 동네 설정하고 시작하기',
