@@ -7,13 +7,20 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: TextButton(
-        onPressed: () {
-          context.read<UserProvider>().setUserAuth(false);
-        },
-        child: Text("로그아웃"),
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                context.read<UserProvider>().setUserAuth(false);
+              },
+              icon: const Icon(
+                Icons.logout,
+              ))
+        ],
+      ),
+      body: Container(
+
       ),
     );
   }

@@ -84,6 +84,7 @@ class TomatoApp extends StatelessWidget {
               backgroundColor: Colors.white,
               titleTextStyle: TextStyle(
                   color: Colors.black, fontFamily: 'DoHyeon', fontSize: 24),
+              actionsIconTheme: IconThemeData(color: Colors.black)
             ),
           ),
           routeInformationParser: BeamerParser(),
