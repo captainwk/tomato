@@ -35,5 +35,7 @@ class AddressService {
       logger.e("error = ${e.message}");
     });
     logger.d(response);
+
+    logger.d(response.data is Map);
   }
 }
