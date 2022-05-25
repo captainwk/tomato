@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tomato/constants/common_size.dart';
+import 'package:tomato/screens/start/address_service.dart';
 
 class AddressPage extends StatelessWidget {
-  const AddressPage({Key? key}) : super(key: key);
+  AddressPage({Key? key}) : super(key: key);
+
+  TextEditingController _addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +15,7 @@ class AddressPage extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
+            controller: _addressController,
             decoration: InputDecoration(
               prefixIcon: const Icon(
                 Icons.search,
@@ -32,7 +36,12 @@ class AddressPage extends StatelessWidget {
             // height: 30,
             width: double.infinity,
             child: TextButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                final text = _addressController.text;
+                if(text.isNotEmpty) {
+                  AddressService().searchAddressByStr(text);
+                }
+              },
               label: Text(
                 '현재위치로 찾기',
                 style: Theme.of(context).textTheme.button,
