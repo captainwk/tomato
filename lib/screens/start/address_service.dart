@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:tomato/constants/keys.dart';
+import 'package:tomato/data/AddressModel.dart';
 import 'package:tomato/utils/logger.dart';
 
 class AddressService {
@@ -34,8 +35,9 @@ class AddressService {
         .catchError((e) {
       logger.e("error = ${e.message}");
     });
-    logger.d(response);
-
-    logger.d(response.data is Map);
+    // response안에 service안에 name으로 접근
+    // logger.d(response.data['response']['service']['name']);
+    AddressModel addressModel = AddressModel.fromJson(response.data);
+    logger.d(addressModel);
   }
 }
