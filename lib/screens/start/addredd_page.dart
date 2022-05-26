@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:tomato/constants/common_size.dart';
 import 'package:tomato/data/AddressModel.dart';
 import 'package:tomato/screens/start/address_service.dart';
+import 'package:tomato/utils/logger.dart';
 
 class AddressPage extends StatefulWidget {
   AddressPage({Key? key}) : super(key: key);
@@ -50,7 +52,32 @@ class _AddressPageState extends State<AddressPage> {
             // height: 30,
             width: double.infinity,
             child: TextButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                Location location = new Location();
+
+                bool _serviceEnabled;
+                PermissionStatus _permissionGranted;
+                LocationData _locationData;
+
+                _serviceEnabled = await location.serviceEnabled();
+                if (!_serviceEnabled) {
+                  _serviceEnabled = await location.requestService();
+                  if (!_serviceEnabled) {
+                    return;
+                  }
+                }
+
+                _permissionGranted = await location.hasPermission();
+                if (_permissionGranted == PermissionStatus.denied) {
+                  _permissionGranted = await location.requestPermission();
+                  if (_permissionGranted != PermissionStatus.granted) {
+                    return;
+                  }
+                }
+
+                _locationData = await location.getLocation();
+                logger.d(_locationData);
+              },
               label: Text(
                 '현재위치로 찾기',
                 style: Theme.of(context).textTheme.button,
