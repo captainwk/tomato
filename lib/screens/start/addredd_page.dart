@@ -1,12 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tomato/constants/common_size.dart';
+import 'package:tomato/data/AddressModel.dart';
 import 'package:tomato/screens/start/address_service.dart';
 
-class AddressPage extends StatelessWidget {
+class AddressPage extends StatefulWidget {
   AddressPage({Key? key}) : super(key: key);
 
+  @override
+  State<AddressPage> createState() => _AddressPageState();
+}
+
+class _AddressPageState extends State<AddressPage> {
   TextEditingController _addressController = TextEditingController();
+
+  AddressModel? _addressModel;
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +23,12 @@ class AddressPage extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
+            onFieldSubmitted: (text) async {
+              _addressModel = await AddressService().searchAddressByStr(text);
+              setState(() {
+
+              });
+            },
             controller: _addressController,
             decoration: InputDecoration(
               prefixIcon: const Icon(
@@ -36,12 +50,7 @@ class AddressPage extends StatelessWidget {
             // height: 30,
             width: double.infinity,
             child: TextButton.icon(
-              onPressed: () {
-                final text = _addressController.text;
-                if(text.isNotEmpty) {
-                  AddressService().searchAddressByStr(text);
-                }
-              },
+              onPressed: () {},
               label: Text(
                 '현재위치로 찾기',
                 style: Theme.of(context).textTheme.button,
@@ -57,12 +66,27 @@ class AddressPage extends StatelessWidget {
             child: ListView.builder(
               padding: const EdgeInsets.symmetric(vertical: common_padding),
               itemBuilder: (context, index) {
+                if (_addressModel == null ||
+                    _addressModel!.result == null ||
+                    _addressModel!.result!.items == null ||
+                    _addressModel!.result!.items![index].address == null) {
+                  return Container(
+                    height: 10,
+                    color: Colors.black,
+                  );
+                }
                 return ListTile(
-                  title: Text("address $index"),
-                  subtitle: const Text("subtitle"),
+                  title: Text(
+                      _addressModel!.result!.items![index].address!.road ?? ''),
+                  subtitle: Text(
+                      _addressModel!.result!.items![index].address!.parcel ?? ''),
                 );
               },
-              itemCount: 100,
+              itemCount: (_addressModel == null ||
+                      _addressModel!.result == null ||
+                      _addressModel!.result!.items == null)
+                  ? 0
+                  : _addressModel!.result!.items!.length,
             ),
           ),
         ],
