@@ -1,83 +1,22 @@
-/// response : {"status":"OK","record":{"total":"1","current":"1"},"page":{"total":"1","current":"1","size":"10"},"result":{"crs":"EPSG:900913","type":"address","items":[{"id":"4113510900106240000","address":{"zipcode":"13487","category":"road","road":"경기도 성남시 분당구 판교로 242 (삼평동)","parcel":"삼평동 624","bldnm":"","bldnmdc":""},"point":{"x":"14148853.48172358","y":"4495338.919111188"}}]}}
-
-class AddressModel {
-  AddressModel({
-    Response? response,
-  }) {
-    _response = response;
-  }
-
-  AddressModel.fromJson(dynamic json) {
-    _response =
-        json['response'] != null ? Response.fromJson(json['response']) : null;
-  }
-
-  Response? _response;
-
-  AddressModel copyWith({
-    Response? response,
-  }) =>
-      AddressModel(
-        response: response ?? _response,
-      );
-
-  Response? get response => _response;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    if (_response != null) {
-      map['response'] = _response?.toJson();
-    }
-    return map;
-  }
-}
-
-/// status : "OK"
-/// record : {"total":"1","current":"1"}
 /// page : {"total":"1","current":"1","size":"10"}
 /// result : {"crs":"EPSG:900913","type":"address","items":[{"id":"4113510900106240000","address":{"zipcode":"13487","category":"road","road":"경기도 성남시 분당구 판교로 242 (삼평동)","parcel":"삼평동 624","bldnm":"","bldnmdc":""},"point":{"x":"14148853.48172358","y":"4495338.919111188"}}]}
 
-class Response {
-  Response({
-    String? status,
-    Record? record,
+class AddressModel {
+  AddressModel({
     Page? page,
     Result? result,
   }) {
-    _status = status;
-    _record = record;
     _page = page;
     _result = result;
   }
 
-  Response.fromJson(dynamic json) {
-    _status = json['status'];
-    _record = json['record'] != null ? Record.fromJson(json['record']) : null;
+  AddressModel.fromJson(dynamic json) {
     _page = json['page'] != null ? Page.fromJson(json['page']) : null;
     _result = json['result'] != null ? Result.fromJson(json['result']) : null;
   }
 
-  String? _status;
-  Record? _record;
   Page? _page;
   Result? _result;
-
-  Response copyWith({
-    String? status,
-    Record? record,
-    Page? page,
-    Result? result,
-  }) =>
-      Response(
-        status: status ?? _status,
-        record: record ?? _record,
-        page: page ?? _page,
-        result: result ?? _result,
-      );
-
-  String? get status => _status;
-
-  Record? get record => _record;
 
   Page? get page => _page;
 
@@ -85,10 +24,6 @@ class Response {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['status'] = _status;
-    if (_record != null) {
-      map['record'] = _record?.toJson();
-    }
     if (_page != null) {
       map['page'] = _page?.toJson();
     }
@@ -128,17 +63,6 @@ class Result {
   String? _crs;
   String? _type;
   List<Items>? _items;
-
-  Result copyWith({
-    String? crs,
-    String? type,
-    List<Items>? items,
-  }) =>
-      Result(
-        crs: crs ?? _crs,
-        type: type ?? _type,
-        items: items ?? _items,
-      );
 
   String? get crs => _crs;
 
@@ -183,17 +107,6 @@ class Items {
   Address? _address;
   Point? _point;
 
-  Items copyWith({
-    String? id,
-    Address? address,
-    Point? point,
-  }) =>
-      Items(
-        id: id ?? _id,
-        address: address ?? _address,
-        point: point ?? _point,
-      );
-
   String? get id => _id;
 
   Address? get address => _address;
@@ -232,15 +145,6 @@ class Point {
 
   String? _x;
   String? _y;
-
-  Point copyWith({
-    String? x,
-    String? y,
-  }) =>
-      Point(
-        x: x ?? _x,
-        y: y ?? _y,
-      );
 
   String? get x => _x;
 
@@ -294,23 +198,6 @@ class Address {
   String? _bldnm;
   String? _bldnmdc;
 
-  Address copyWith({
-    String? zipcode,
-    String? category,
-    String? road,
-    String? parcel,
-    String? bldnm,
-    String? bldnmdc,
-  }) =>
-      Address(
-        zipcode: zipcode ?? _zipcode,
-        category: category ?? _category,
-        road: road ?? _road,
-        parcel: parcel ?? _parcel,
-        bldnm: bldnm ?? _bldnm,
-        bldnmdc: bldnmdc ?? _bldnmdc,
-      );
-
   String? get zipcode => _zipcode;
 
   String? get category => _category;
@@ -360,17 +247,6 @@ class Page {
   String? _current;
   String? _size;
 
-  Page copyWith({
-    String? total,
-    String? current,
-    String? size,
-  }) =>
-      Page(
-        total: total ?? _total,
-        current: current ?? _current,
-        size: size ?? _size,
-      );
-
   String? get total => _total;
 
   String? get current => _current;
@@ -382,47 +258,6 @@ class Page {
     map['total'] = _total;
     map['current'] = _current;
     map['size'] = _size;
-    return map;
-  }
-}
-
-/// total : "1"
-/// current : "1"
-
-class Record {
-  Record({
-    String? total,
-    String? current,
-  }) {
-    _total = total;
-    _current = current;
-  }
-
-  Record.fromJson(dynamic json) {
-    _total = json['total'];
-    _current = json['current'];
-  }
-
-  String? _total;
-  String? _current;
-
-  Record copyWith({
-    String? total,
-    String? current,
-  }) =>
-      Record(
-        total: total ?? _total,
-        current: current ?? _current,
-      );
-
-  String? get total => _total;
-
-  String? get current => _current;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['total'] = _total;
-    map['current'] = _current;
     return map;
   }
 }

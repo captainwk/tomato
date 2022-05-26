@@ -37,7 +37,6 @@ class AddressService {
     });
     // response안에 service안에 name으로 접근
     // logger.d(response.data['response']['service']['name']);
-    AddressModel addressModel = AddressModel.fromJson(response.data);
-    logger.d(addressModel);
+    AddressModel addressModel = AddressModel.fromJson(response.data['response']);
   }
 }
