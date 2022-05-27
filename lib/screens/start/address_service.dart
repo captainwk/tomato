@@ -41,4 +41,25 @@ class AddressService {
     logger.d(addressModel.result!.items!.length);
     return addressModel;
   }
+
+  Future<void> findAddressByCoordinate({required double log, required double lat}) async {
+
+    final Map<String, dynamic> formData = {
+      'key': VWORLD_KEY,
+      'service' : 'address',
+      'request': 'getAddress',
+      'point': '$log, $lat',
+      'type' : 'both'
+    };
+
+    final response = await Dio()
+        .get('http://api.vworld.kr/req/address', queryParameters: formData)
+        .catchError((e) {
+      logger.e("error = ${e.message}");
+    });
+
+    logger.d(response);
+    return;
+
+  }
 }

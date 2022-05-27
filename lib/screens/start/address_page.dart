@@ -14,7 +14,7 @@ class AddressPage extends StatefulWidget {
 }
 
 class _AddressPageState extends State<AddressPage> {
-  TextEditingController _addressController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
 
   AddressModel? _addressModel;
 
@@ -77,6 +77,8 @@ class _AddressPageState extends State<AddressPage> {
 
                 _locationData = await location.getLocation();
                 logger.d(_locationData);
+                AddressService().findAddressByCoordinate(log: _locationData.longitude!, lat: _locationData.latitude!);
+                // AddressService().findAddressByCoordinate(log: 126.71447360681148, lat: 37.36341055367434);
               },
               label: Text(
                 '현재위치로 찾기',
