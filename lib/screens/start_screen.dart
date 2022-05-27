@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tomato/screens/start/addredd_page.dart';
+import 'package:tomato/screens/start/address_page.dart';
 import 'package:tomato/screens/start/auth_page.dart';
 import 'package:tomato/screens/start/intro_page.dart';
 
